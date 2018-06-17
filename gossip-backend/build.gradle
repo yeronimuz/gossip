@@ -1,0 +1,40 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+apply plugin: 'gradle-one-jar'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId 'com.altran.gossip'
+            artifactId 'gossip-backend'
+            version project.version
+
+            from components.java
+        }
+    }
+}
+
+task bigJar(type: OneJar) {
+    manifest {
+        attributes 'Implementation-Title': 'Altran Gossip-Backend',
+                   'Implementation-Version': project.version,
+                   'Main-Class': 'com.altran.gossip.backend.BackendService'
+    }
+}
+
+dependencies {
+    compile libraries.jackson_core
+    compile libraries.jackson_databind
+    compile libraries.dropwizard_core
+    compile libraries.eclipse_paho
+    compile libraries.hibernate_core
+    compile libraries.mysql_connector
+    compile libraries.slf4j_api
+  	compile project(':gossip-library')
+    // test 
+    testCompile libraries.junit
+    testCompile libraries.hamcrest_junit
+    testCompile libraries.jmockit
+    testCompile group: 'org.apache.derby', name: 'derby', version: '10.14.1.0'
+}

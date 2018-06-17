@@ -1,0 +1,44 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'gradle-one-jar'
+apply plugin: 'maven-publish'
+apply plugin: 'jacoco'
+
+version '0.1-SNAPSHOT'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId 'com.lankheet.iot'
+            artifactId 'lnb-webservice'
+            version project.version
+
+            from components.java
+        }
+    }
+}
+
+task bigJar(type: OneJar) {
+    mainClass = 'com.lankheet.iot.webservice.WebService'
+    manifest {
+        attributes 'Implementation-Title': 'Gossip-Webservice',
+                   'Implementation-Version': version,
+                   'Main-Class': mainClass
+    }
+}
+
+dependencies {
+    compile libraries.jackson_core
+    compile libraries.jackson_databind
+    compile libraries.dropwizard_core
+    compile libraries.eclipse_paho
+    compile libraries.hibernate_core
+    compile libraries.mysql_connector
+    compile libraries.slf4j_api
+  	compile project(':gossip-library')
+    // test 
+    testCompile libraries.junit
+    testCompile libraries.hamcrest_junit
+    testCompile libraries.jmockit
+    testCompile group: 'org.apache.derby', name: 'derby', version: '10.14.1.0'
+}
