@@ -16,7 +16,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The rumor.
- *
  */
 @Entity(name = "gossip")
 public class Gossip {
@@ -36,6 +35,12 @@ public class Gossip {
 
 	public Gossip() {
 		// Both JPA and Jaxon need this
+	}
+
+	public Gossip(Date time, String name, String message) {
+		this.time = time;
+		this.name = name;
+		this.message = message;
 	}
 
 	public Date getTime() {
