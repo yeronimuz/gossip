@@ -25,14 +25,14 @@ package com.lankheet.iot.webservice.config;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
+
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.altran.gossip.webservice.config.DatabaseConfig;
-import com.altran.gossip.webservice.config.MqttConfig;
 import com.altran.gossip.webservice.config.WebServiceConfig;
 
-import cucumber.api.java.After;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Environment;
 
@@ -83,15 +83,4 @@ public class WebServiceConfigTest {
         assertThat(databaseConfig.getUserName(), is("testuser"));
         assertThat(databaseConfig.getPassword(), is("p@ssW0rd"));
     }
-
-    @Test
-    public void testConfigMqtt() {
-        WebServiceConfigTester wsTester = WebServiceConfigTester.getInstance();
-        
-        MqttConfig mqttConfig = wsTester.wsConfig.getMqttConfig();
-        assertThat(mqttConfig, is(notNullValue()));
-        assertThat(mqttConfig.getUrl(), is("tcp://localhost:1883"));
-        assertThat(mqttConfig.getUserName(), is("johndoe"));
-        assertThat(mqttConfig.getPassword(), is ("secret"));
-    }    
 }

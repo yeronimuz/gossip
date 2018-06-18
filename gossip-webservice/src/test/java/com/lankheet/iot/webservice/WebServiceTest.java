@@ -23,22 +23,23 @@ package com.lankheet.iot.webservice;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.altran.gossip.entities.Gossip;
 import com.altran.gossip.webservice.WebService;
 import com.altran.gossip.webservice.config.DatabaseConfig;
-import com.lankheet.iot.datatypes.entities.Measurement;
-import com.lankheet.iot.datatypes.entities.MeasurementType;
-import com.lankheet.iot.datatypes.entities.Sensor;
 
 /**
  * Test for @link {@link WebService} A database is required An mqtt server is required
@@ -66,20 +67,22 @@ public class WebServiceTest {
         emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT, properties);
         em = emf.createEntityManager();
         // Prepare database
-//        Sensor sensor1 = new Sensor(SensorType.POWER_METER.getId(), "power-meter", "meterkast");
-//        em.getTransaction().begin();
-//        em.persist(sensor1);
-//        em.getTransaction().commit();
+        Gossip gossip = new Gossip(new Date(), "fake person", "fake news");
+        em.getTransaction().begin();
+        em.persist(gossip);
+        em.getTransaction().commit();
     }
 
     @Test
     public void testEndToEndTest() throws Exception {
-        Measurement measurement = new Measurement(new Sensor(), new Date(), MeasurementType.ACTUAL_CONSUMED_POWER, 1.1);
+        Gossip gossip = new Gossip(new Date(), "fake person", "fake news");
+        // TODO: Put it somewhere
         Thread.sleep(2000);
-        Query query = em.createQuery("SELECT e FROM measurements e WHERE e.sensorId = " + measurement.getSensor()
-                + "AND e.type = " + measurement.getMeasurementType() + " AND e.value = " + measurement.getValue());
-        List<Measurement> resultList = query.getResultList();
-        int numberOfDuplicates = resultList.size();
-        assertThat(numberOfDuplicates, is(1));
+        Query query = em.createQuery("SELECT e FROM gossip e");
+        List<Gossip> resultList = query.getResultList();
+        int numberOfRumors = resultList.size();
+        assertThat(numberOfRumors, is(1));
+        
+        // TODO: Query the server (REST call)
     }
 }

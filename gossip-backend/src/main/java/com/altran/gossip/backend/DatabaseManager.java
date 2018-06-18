@@ -19,8 +19,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.altran.gossip.webservice;
+package com.altran.gossip.backend;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,16 +33,20 @@ import javax.persistence.Persistence;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.altran.gossip.backend.config.DatabaseConfig;
+import com.altran.gossip.backend.dao.DaoListener;
 import com.altran.gossip.entities.Gossip;
-import com.altran.gossip.webservice.config.DatabaseConfig;
-import com.altran.gossip.webservice.dao.DaoListener;
 
 import io.dropwizard.lifecycle.Managed;
 
+/**
+ * The database manager saves the received Gossips in the data store.
+ *
+ */
 public class DatabaseManager implements Managed, DaoListener {
 	private static final Logger LOG = LoggerFactory.getLogger(DatabaseManager.class);
 
-	private static final String PERSISTENCE_UNIT = "gossip-pu";
+	private static final String PERSISTENCE_UNIT = "meas-pu";
 	private DatabaseConfig dbConfig;
 	private EntityManagerFactory emf;
 	private EntityManager em;
@@ -69,7 +74,24 @@ public class DatabaseManager implements Managed, DaoListener {
 	}
 
 	@Override
-	public List<Gossip> getAllGossip() {
-		return em.createQuery("SELECT e FROM gossip e").getResultList();
+	public void saveNewRumor(Gossip gossip) {
+		LOG.info("Storing: " + gossip);
+		em.getTransaction().begin();
+		em.persist(gossip);
+		em.getTransaction().commit();
+	}
+
+	@Override
+	public List<Gossip> getGossipByUser(String user) {
+		List<Gossip> returnList = null;
+		String query = "SELECT e FROM Gossips e WHERE e.name = :name ORDER BY e.time ASC";
+		returnList = em.createQuery(query).setParameter("name", user).getResultList();
+		return returnList;
+	}
+
+	@Override
+	public List<Gossip> getGossipByDate(Date date) {
+		String query = "SELECT e FROM Gossips e WHERE e.date > :date";
+		return em.createQuery(query).setParameter("date", date).getResultList();
 	}
 }

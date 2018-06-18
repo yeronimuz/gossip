@@ -9,7 +9,7 @@ mqttConfig:
 
 databaseConfig:
   driver: com.mysql.jdbc.Driver
-  url: jdbc:mysql://localhost:3306/domotics
+  url: jdbc:mysql://localhost:3306/gossip
   userName: testuser
   password: p@ssW0rd
 

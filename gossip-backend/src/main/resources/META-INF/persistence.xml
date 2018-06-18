@@ -14,9 +14,9 @@
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/domotics" />
-            <property name="javax.persistence.jdbc.user" value="lnb" />
-            <property name="javax.persistence.jdbc.password" value="lnb" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/gossip" />
+            <property name="javax.persistence.jdbc.user" value="altran" />
+            <property name="javax.persistence.jdbc.password" value="altran" />
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
             <property name="hibernate.show_sql" value="true" />

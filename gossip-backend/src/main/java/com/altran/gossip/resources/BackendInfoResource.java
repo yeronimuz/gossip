@@ -27,7 +27,7 @@ public class BackendInfoResource {
 	 */
 	@GET
 	@Timed
-	public BackendServiceInfo webServiceInfo() throws IOException {
+	public BackendServiceInfo backendServiceInfo() throws IOException {
 		return webServiceInfo;
 	}
 }

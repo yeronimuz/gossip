@@ -1,4 +1,4 @@
-# PowerMeterAgent configuration file
+# Gossip backend configuration file
 mqttConfig:
   url: tcp://localhost:1883
   userName: johndoe
