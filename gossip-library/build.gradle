@@ -11,6 +11,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
+version = '0.0.1'
 dependencies {
 	compile libraries.hibernate_core
 	compile libraries.jackson_databind
@@ -21,9 +22,7 @@ publishing {
         maven(MavenPublication) {
             groupId 'com.altran.gossip'
             artifactId 'gossip-library'
-            version project.version
-
-            from components.java
+            version version
         }
     }
 }
