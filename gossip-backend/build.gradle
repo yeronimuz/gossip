@@ -1,7 +1,9 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
-apply plugin: 'gradle-one-jar'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+version = '1.0'
 
 publishing {
     publications {
@@ -15,12 +17,17 @@ publishing {
     }
 }
 
-task bigJar(type: OneJar) {
+shadowJar {
+  mergeServiceFiles()
+}
+
+jar {
     manifest {
-        attributes 'Implementation-Title': 'Altran Gossip-Backend',
-                   'Implementation-Version': project.version,
+        attributes 'Implementation-Title': 'Altran Gossip-Backend', 
+                   'Implementation-Version': version, 
                    'Main-Class': 'com.altran.gossip.backend.BackendService'
     }
+    print "Version: " + project.version
 }
 
 dependencies {

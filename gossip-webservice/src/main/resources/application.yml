@@ -2,7 +2,7 @@
 
 databaseConfig:
   driver: com.mysql.jdbc.Driver
-  url: jdbc:mysql://localhost:3306/gossip
+  url: jdbc:mysql://localhost:3306/gossiptest
   userName: testuser
   password: p@ssW0rd
 
@@ -11,7 +11,7 @@ server:
 #  hardNofileLimit: 1000
   applicationConnectors:
     - type: http
-      port: 8080
+      port: 8085
 #    - type: https
 #      port: 8443
 #      keyStorePath: example.keystore
@@ -23,7 +23,7 @@ server:
     #  keyStorePassword: example
   adminConnectors:
     - type: http
-      port: 8081
+      port: 8086
 #    - type: https
 #      port: 8444
 #      keyStorePath: example.keystore
@@ -39,7 +39,7 @@ logging:
   loggers:
 
     # Sets the level for 'com.example.app' to DEBUG.
-    com.lankheet.iot.webservice: DEBUG
+    com.altran.gossip.webservice: DEBUG
 
 # Logback's Time Based Rolling Policy - archivedLogFilenamePattern: /tmp/application-%d{yyyy-MM-dd}.log.gz
 # Logback's Size and Time Based Rolling Policy -  archivedLogFilenamePattern: /tmp/application-%d{yyyy-MM-dd}-%i.log.gz

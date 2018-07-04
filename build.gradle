@@ -20,6 +20,7 @@ allprojects {
 	repositories {
 	    mavenLocal()
 	    mavenCentral()
+	    jcenter()
 	}
 }
 
@@ -35,18 +36,19 @@ jacoco {
 buildscript {
     repositories {
         mavenCentral()
+        jcenter()
     }
-    dependencies {
-        classpath 'com.github.rholder:gradle-one-jar:1.0.4'
+	dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
     }
 }
 
 
 ext.libraries = [
 	// production
-    jackson_core: 'com.fasterxml.jackson.core:jackson-core:2.8.1',
-    jackson_databind: 'com.fasterxml.jackson.core:jackson-databind:2.8.1',
-    dropwizard_core: 'io.dropwizard:dropwizard-core:1.3.1',
+    jackson_core: 'com.fasterxml.jackson.core:jackson-core:2.9.6',
+    jackson_databind: 'com.fasterxml.jackson.core:jackson-databind:2.9.6',
+    dropwizard_core: 'io.dropwizard:dropwizard-core:1.3.5',
     eclipse_paho: 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.0',
     hibernate_core: 'org.hibernate:hibernate-core:5.2.10.Final',
     mysql_connector: 'mysql:mysql-connector-java:5.1.44',

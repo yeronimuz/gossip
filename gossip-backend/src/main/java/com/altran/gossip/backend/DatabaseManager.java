@@ -46,7 +46,7 @@ import io.dropwizard.lifecycle.Managed;
 public class DatabaseManager implements Managed, DaoListener {
 	private static final Logger LOG = LoggerFactory.getLogger(DatabaseManager.class);
 
-	private static final String PERSISTENCE_UNIT = "meas-pu";
+	private static final String PERSISTENCE_UNIT = "gossip-pu";
 	private DatabaseConfig dbConfig;
 	private EntityManagerFactory emf;
 	private EntityManager em;
@@ -83,15 +83,19 @@ public class DatabaseManager implements Managed, DaoListener {
 
 	@Override
 	public List<Gossip> getGossipByUser(String user) {
+		LOG.info("Get gossip by user {}", user);
+
 		List<Gossip> returnList = null;
-		String query = "SELECT e FROM Gossips e WHERE e.name = :name ORDER BY e.time ASC";
-		returnList = em.createQuery(query).setParameter("name", user).getResultList();
+		String query = "SELECT e FROM gossips e WHERE e.blabber = '" + user + "' ORDER BY e.time ASC";
+		LOG.trace("Running query: {}", query);
+		returnList = em.createQuery(query, Gossip.class).setMaxResults(10).getResultList();
+		LOG.info("Found: {} items", returnList.size());
 		return returnList;
 	}
 
 	@Override
 	public List<Gossip> getGossipByDate(Date date) {
-		String query = "SELECT e FROM Gossips e WHERE e.date > :date";
+		String query = "SELECT e FROM gossips e WHERE e.date > :date";
 		return em.createQuery(query).setParameter("date", date).getResultList();
 	}
 }

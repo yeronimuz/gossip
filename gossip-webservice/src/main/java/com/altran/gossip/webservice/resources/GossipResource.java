@@ -30,13 +30,14 @@ import javax.ws.rs.core.MediaType;
 
 import com.altran.gossip.entities.Gossip;
 import com.altran.gossip.webservice.DatabaseManager;
+import com.altran.gossip.webservice.dao.DaoListener;
 import com.codahale.metrics.annotation.Timed;
 
 @Path("/gossip")
 @Produces(MediaType.APPLICATION_JSON)
 public class GossipResource {
 
-    private DatabaseManager dbManager;
+    private DaoListener dbManager;
 
     public GossipResource(DatabaseManager dbManager) {
         this.dbManager = dbManager;

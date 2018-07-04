@@ -17,23 +17,21 @@ public interface DaoListener {
 	void saveNewRumor(Gossip gossip);
 
 	/**
-	 * A client requests all measurements by sensor from the database
+	 * A client requests all gossip produced by a specific user
 	 * 
-	 * @param sensorId
-	 *            The sensorId of which the measurements to get
+	 * @param user
+	 *            The user of which the gossip to get
 	 * 
-	 * @return The measurements from the database.
+	 * @return The gossips from the database.
 	 */
 	List<Gossip> getGossipByUser(String user);
 
 	/**
-	 * Request all measurements of a specific type for a specific sensor.
+	 * Request all gossip produced on or after a specific day.
 	 * 
-	 * @param sensorId
-	 *            The originated sensor
-	 * @param type
-	 *            The message type
-	 * @return The measurements that comply to the input criteria
+	 * @param date
+	 *            The timestamp of the message
+	 * @return The gossips from the database.
 	 */
 	List<Gossip> getGossipByDate(Date date);
 

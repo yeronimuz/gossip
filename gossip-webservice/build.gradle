@@ -1,16 +1,16 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'gradle-one-jar'
 apply plugin: 'maven-publish'
 apply plugin: 'jacoco'
+apply plugin: 'com.github.johnrengelman.shadow'
 
 version '0.1-SNAPSHOT'
 
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId 'com.lankheet.iot'
-            artifactId 'lnb-webservice'
+           groupId 'com.altran.gossip'
+            artifactId 'gossip-webservice'
             version project.version
 
             from components.java
@@ -18,12 +18,11 @@ publishing {
     }
 }
 
-task bigJar(type: OneJar) {
-    mainClass = 'com.lankheet.iot.webservice.WebService'
+jar {
     manifest {
         attributes 'Implementation-Title': 'Gossip-Webservice',
                    'Implementation-Version': version,
-                   'Main-Class': mainClass
+                   'Main-Class': 'com.lankheet.iot.webservice.WebService'
     }
 }
 

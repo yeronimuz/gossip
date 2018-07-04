@@ -30,7 +30,7 @@ public class WebServiceInfo {
 
     /**
      * Constructor.<BR>
-     * When running from Eclipse http://localhost:8080/info will return the name and version of the JRE.
+     * When running from Eclipse http://localhost:&lt;port&gt;/info will return the name and version of the JRE.
      * 
      * @throws IOException
      */

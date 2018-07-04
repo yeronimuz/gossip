@@ -29,16 +29,17 @@ import com.altran.gossip.backend.health.DatabaseHealthCheck;
 import com.altran.gossip.backend.health.MqttConnectionHealthCheck;
 import com.altran.gossip.backend.resources.BackendInfoResource;
 import com.altran.gossip.backend.resources.BackendServiceInfo;
-import com.altran.gossip.resources.GossipResource;
+import com.altran.gossip.backend.resources.GossipResource;
 
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
 /**
- * The web service has the following tasks:<BR>
- * <li>It accepts measurements from the message broker
- * <li>It saves the measurements in the database
+ * The backend service has the following tasks:<BR>
+ * <li>It accepts gossip from the message broker
+ * <li>It accepts gossip from a POST call on port 8080/api/gossip
+ * <li>It saves the gossip in the database
  * <li>It serves as a resource for the measurements database
  *
  */

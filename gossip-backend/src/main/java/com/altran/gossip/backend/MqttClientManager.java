@@ -14,7 +14,7 @@ import com.altran.gossip.backend.dao.DaoListener;
 import io.dropwizard.lifecycle.Managed;
 
 /**
- * MQTT client manager that subscribes to the domotics topics.
+ * MQTT client manager that subscribes to the gossipeous topics.
  *
  */
 public class MqttClientManager implements Managed {
@@ -36,10 +36,7 @@ public class MqttClientManager implements Managed {
     }
 
     /**
-     * TODO: This method should be triggered by the database command table change in order to configure
-     * clients.<BR>
-     * Possible commands: Command to switch something, Config to set a (set of) parameter(s), Measure:
-     * Invoke a sensor to generate a new measurement
+     * Publish something back to clients
      * 
      * @param topic The command topic {CMD, CONFIG, MEASURE}
      * @throws MqttPersistenceException

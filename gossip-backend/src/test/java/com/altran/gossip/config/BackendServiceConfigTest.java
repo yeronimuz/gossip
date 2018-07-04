@@ -54,7 +54,7 @@ public class BackendServiceConfigTest {
         DatabaseConfig databaseConfig = wsTester.wsConfig.getDatabaseConfig();
         assertThat(databaseConfig, is(notNullValue()));
         assertThat(databaseConfig.getDriver(), is("com.mysql.jdbc.Driver"));
-        assertThat(databaseConfig.getUrl(), is("jdbc:mysql://localhost:3306/domotics"));
+        assertThat(databaseConfig.getUrl(), is("jdbc:mysql://localhost:3306/gossiptest"));
         assertThat(databaseConfig.getUserName(), is("testuser"));
         assertThat(databaseConfig.getPassword(), is("p@ssW0rd"));
     }
