@@ -1,0 +1,28 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+version = '0.1-SNAPSHOT'
+
+shadowJar {
+  mergeServiceFiles()
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Altran Gossip-Client', 
+                   'Implementation-Version': version, 
+                   'Main-Class': 'com.altran.gossip.client.GossipClient'
+    }
+    print "Version: " + project.version
+}
+
+dependencies {
+    compile libraries.jackson_core
+    compile libraries.jackson_databind
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.6'
+    compile libraries.eclipse_paho
+    compile libraries.slf4j_api
+  	compile project(':gossip-library')
+}

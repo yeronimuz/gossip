@@ -13,5 +13,6 @@
 include 'gossip-library'
 include 'gossip-backend'
 include 'gossip-webservice'
+include 'gossip-client'
 
 rootProject.name = 'gossip'
